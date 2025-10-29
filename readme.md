@@ -1,3 +1,115 @@
+Here is a template for your `README.md` file with instructions on how to install Python 3.11 and Miniconda.
+
+---
+
+# BAYESIAN ENTROPY FOR LLM HALLUCINATION DETECTION
+
+A brief description of your project.
+
+## Base Installations
+
+This project requires Python 3.11 and Miniconda. Follow the instructions below to set up your environment.
+
+### 1. Python 3.11 Installation
+
+Python 3.11 is a prerequisite for this project. It offers significant performance improvements over previous versions.
+
+#### Windows
+
+1.  **Download the installer:** Go to the official Python website and download the Windows installer for Python 3.11.
+2.  **Run the installer:** Double-click the downloaded `.exe` file to run it.
+3.  **Important - Add Python to PATH:** On the first screen of the installer, make sure to check the box that says "Add Python 3.11 to PATH". This will allow you to run Python from the command prompt.
+4.  **Install:** Click "Install Now" to begin the installation with the recommended settings.
+5.  **Verify installation:** Open a Command Prompt or PowerShell and type the following command:
+    ```bash
+    python --version
+    ```
+    You should see "Python 3.11.x" as the output.
+
+#### macOS
+
+1.  **Download the installer:** Visit the official Python website and download the macOS installer for Python 3.11.
+2.  **Run the installer:** Double-click the downloaded `.pkg` file to start the installation.
+3.  **Follow the prompts:** Continue through the installation steps, agreeing to the license and selecting the install location.
+4.  **Verify installation:** Open the Terminal and type:
+    ```bash
+    python3 --version
+    ```
+    The output should be "Python 3.11.x".
+
+#### Linux
+
+For most modern Linux distributions, you can install Python 3.11 using the package manager.
+
+1.  **Update package lists:**
+    ```bash
+    sudo apt-get update
+    ```
+2.  **Install Python 3.11:**
+    ```bash
+    sudo apt-get install python3.11
+    ```
+3.  **Verify installation:**
+    ```bash
+    python3.11 --version
+    ```
+
+### 2. Miniconda Installation
+
+Miniconda is a minimal installer for conda, a package and environment manager. It helps in creating isolated environments to manage project dependencies.
+
+#### Windows
+
+1.  **Download the installer:** Go to the Miniconda documentation on the Anaconda website and download the latest Windows installer.
+2.  **Run the installer:** Double-click the downloaded `.exe` file.
+3.  **Follow the prompts:** Proceed with the installation, accepting the default settings is usually sufficient for most users.
+4.  **Open Anaconda Prompt:** After installation, open the Anaconda Prompt from the Start Menu.
+5.  **Verify installation:** In the Anaconda Prompt, type:
+    ```bash
+    conda --version
+    ```
+    This should display the installed conda version.
+
+#### macOS
+
+1.  **Download the installer:** Download the latest Miniconda installer for macOS from the Anaconda website.
+2.  **Run the installer:** Open a Terminal and run the downloaded shell script. For example:
+    ```bash
+    bash Miniconda3-latest-MacOSX-x86_64.sh
+    ```
+3.  **Follow the prompts:** Review the license agreement and accept the default installation location.
+4.  **Restart your Terminal:** Close and reopen your terminal window for the changes to take effect. You should see `(base)` at the beginning of your prompt.
+5.  **Verify installation:**
+    ```bash
+    conda list
+    ```
+    This command will show a list of installed packages in the base environment.
+
+#### Linux
+
+1.  **Download the installer:** Download the latest Miniconda installer for Linux from the Anaconda website.
+2.  **Run the installer:** Open a terminal and run the downloaded shell script:
+    ```bash
+    bash Miniconda3-latest-Linux-x86_64.sh
+    ```3.  **Follow the prompts:** Accept the license terms and the default installation location.
+4.  **Restart your Terminal:** Close and reopen your terminal. The `(base)` environment should be active.
+5.  **Verify installation:**
+    ```bash
+    conda info
+    ```
+    This will display information about your conda installation.
+
+---
+
+
+
+
+
+
+
+
+
+
 | 📄 / 📁                                                                                       | Description                                                                        |
 | :-------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | **📄 README.md**                                                                              | Main project documentation — explains setup, usage, and experiments.               |
