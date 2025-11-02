@@ -7,7 +7,7 @@ This repository explores **hallucination detection and mitigation** in Large Lan
 ---
 
 ## 📁 Project Structure
-
+```
 LLM-HALLUCINATION/
 ├── .vscode/
 │   └── settings.json
@@ -75,7 +75,7 @@ LLM-HALLUCINATION/
 ├── requirements.txt
 ├── README.md
 
-
+```
 
 
 
