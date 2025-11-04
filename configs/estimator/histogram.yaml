@@ -1,6 +1,0 @@
-# ==========================================
-# Histogram Estimator Configuration
-# ==========================================
-
-type: "histogram"
-num_samples: 10

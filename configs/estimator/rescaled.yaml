@@ -1,7 +1,0 @@
-# ==========================================
-# Rescaled Estimator Configuration
-# ==========================================
-
-type: "rescaled"
-num_samples: 10
-length_normalization: true
