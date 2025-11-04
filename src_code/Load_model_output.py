@@ -55,7 +55,7 @@ CleanedDataset = namedtuple("CleanedDataset", ["is_hallucination",
 
 
 def create_cleaned_dataset(path: str) -> CleanedDataset:
-    path = path1  # Change this to load different files
+    
 
     # loading data    
     with open(path, 'rb') as file:
@@ -69,8 +69,6 @@ def create_cleaned_dataset(path: str) -> CleanedDataset:
     questions        = data[6],
     contexts         = data[7]
     )
-    print("Successfully created a new, clean dataset object.")
-    print(f"Fields in our new object: {clean_data._fields}")
-    print(f"Number of prompts in response_list: {len(clean_data.response_list)}")
+    return clean_data
 
 
