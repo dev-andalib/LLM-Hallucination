@@ -36,10 +36,7 @@ def euclidean_distance(A, B):
 def manhattan_distance(A, B):
     return np.sum(np.abs(A - B))
 
-def jaccard_similarity(A, B):
-    intersection = np.sum(np.minimum(A, B))
-    union = np.sum(np.maximum(A, B))
-    return intersection / union
+
 
 def dot_product(A, B):
     return np.dot(A, B)
@@ -50,9 +47,6 @@ def pearson_correlation(A, B):
 def rbf_kernel(A, B, gamma=0.1):
     return np.exp(-gamma * np.linalg.norm(A - B) ** 2)
 
-def dice_coefficient(A, B):
-    intersection = np.sum(np.minimum(A, B))
-    return 2 * intersection / (np.sum(A) + np.sum(B))
 
 # Cluster responses based on similarity
 def cluster_responses(list_of_responses, model, threshold, similarity_metric):
@@ -68,6 +62,7 @@ def cluster_responses(list_of_responses, model, threshold, similarity_metric):
 
         placed = False
         for j in list(cluster.keys()):
+            
             rep_idx = next(iter(cluster[j].keys()))
             rep_vec = response_vectors[rep_idx]
             if similarity_metric == 'cosine':
@@ -76,16 +71,14 @@ def cluster_responses(list_of_responses, model, threshold, similarity_metric):
                 sim = -euclidean_distance(vec, rep_vec)  # Negative for reverse similarity
             elif similarity_metric == 'manhattan':
                 sim = -manhattan_distance(vec, rep_vec)  # Negative for reverse similarity
-            elif similarity_metric == 'jaccard':
-                sim = jaccard_similarity(vec, rep_vec)
+
             elif similarity_metric == 'dot':
                 sim = dot_product(vec, rep_vec)
             elif similarity_metric == 'pearson':
                 sim = pearson_correlation(vec, rep_vec)
             elif similarity_metric == 'rbf':
                 sim = rbf_kernel(vec, rep_vec)
-            elif similarity_metric == 'dice':
-                sim = dice_coefficient(vec, rep_vec)
+
             
             if sim >= threshold:
                 cluster[j][rep_idx].append(i)
@@ -107,15 +100,15 @@ def cluster_responses(list_of_responses, model, threshold, similarity_metric):
 
 # Save clustering results for each metric in different directories
 if __name__ == "__main__":
-    similarity_metrics = ['cosine', 'euclidean', 'manhattan', 'jaccard', 'dot', 'pearson', 'rbf', 'dice']
+    similarity_metrics = ['cosine', 'euclidean', 'manhattan', 'dot', 'pearson', 'rbf']
     
     # Create output directories for each similarity metric
     for metric in similarity_metrics:
         output_dir = f"D:/LLM-Hallucination/data/meanings/{metric}_sim"
         os.makedirs(output_dir, exist_ok=True)
 
-    # all_paths = [path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, path13]
-    all_paths = [path1]
+    all_paths = [path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, path13]
+    # all_paths = [path1]
 
     for file_path in all_paths:
         print(f"\n========================================================")
