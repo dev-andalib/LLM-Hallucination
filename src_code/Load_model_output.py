@@ -44,20 +44,20 @@ random.seed(42)
 np.random.seed(42)
 
 # what i actually need for my pipeline
-CleanedDataset = namedtuple("CleanedDataset", ["is_hallucination", 
-                                                 "response_list", 
-                                                 "token_log_probs", 
-                                                 "questions", 
-                                                 "contexts",
-                        ])
+CleanedDataset = namedtuple("CleanedDataset", 
+                            ["is_hallucination", 
+                            "response_list", 
+                            "token_log_probs", 
+                            "questions", 
+                            "contexts",
+                            "semantic_ids",]
+                            )
 
 
 
 
 
 def create_cleaned_dataset(path: str) -> CleanedDataset:
-    
-
     # loading data    
     with open(path, 'rb') as file:
         data = pickle.load(file)
@@ -72,4 +72,22 @@ def create_cleaned_dataset(path: str) -> CleanedDataset:
     )
     return clean_data
 
+
+
+def originalData(path: str) -> CleanedDataset:
+    # loading data    
+    with open(path, 'rb') as file:
+        data = pickle.load(file)
+
+    # creating a new dataset object with only the fields we need    
+    original_data = CleanedDataset(
+    is_hallucination = data[0],
+    semantic_ids     = data[1],
+    response_list    = data[2],
+    token_log_probs  = data[3],
+    questions        = data[6],
+    contexts         = data[7],
+    
+    )
+    return original_data
 

@@ -77,7 +77,6 @@ class BayesianSemanticEntropy:
         final_score = np.mean(entropy_estimates)
         return final_score
     
-
     def adaptive_estimator(self, samples):
         if not samples:
             return 0.0, 0.0
