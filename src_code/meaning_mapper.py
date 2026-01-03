@@ -27,11 +27,47 @@ def vectorize_sentence(sentence, model):
     return normalize(sentence_vec.reshape(1, -1))[0]
 
 # Define similarity functions
-def cosine_similarity(A, B):
-    return np.dot(A, B) / (np.linalg.norm(A) * np.linalg.norm(B))
+def cosine_similarity(A, B, eps=1e-12):
+    norm_A = np.linalg.norm(A)
+    norm_B = np.linalg.norm(B)
+
+    # Case 1: both vectors empty
+    if norm_A < eps and norm_B < eps:
+        return 1.0
+
+    # Case 2: one empty, one not
+    if norm_A < eps or norm_B < eps:
+        return 0.0
+
+    # Case 3: normal cosine similarity
+    return float(np.dot(A, B) / (norm_A * norm_B))
+
 
 def pearson_correlation(A, B):
-    return np.corrcoef(A, B)[0, 1]
+    # Compute the means of A and B
+    mean_A = np.mean(A)
+    mean_B = np.mean(B)
+
+    # Center the data by subtracting the mean from each value
+    A_centered = A - mean_A
+    B_centered = B - mean_B
+
+    # Compute the standard deviations of A and B
+    stddev_A = np.std(A_centered)
+    stddev_B = np.std(B_centered)
+
+    # Handle cases where the standard deviation is zero
+    if stddev_A == 0 and stddev_B == 0:
+        return 1.0  # Perfect correlation if both vectors are constant
+    elif stddev_A == 0 or stddev_B == 0:
+        return 0.0  # No correlation if one vector is constant
+
+    # Normal Pearson correlation formula
+    correlation = np.dot(A_centered, B_centered) / (stddev_A * stddev_B)
+    return correlation
+
+
+
 
 def rbf_kernel(A, B, gamma=0.1):
     return np.exp(-gamma * np.linalg.norm(A - B) ** 2)
@@ -84,14 +120,14 @@ def cluster_responses(list_of_responses, model, threshold, similarity_metric):
 
 # Save clustering results for each metric in different directories
 if __name__ == "__main__":
-    similarity_metrics = ['cosine', 'pearson', 'rbf']
-    
+    similarity_metrics = [ 'cosine', 'pearson', 'rbf' ]
+     
     # Create output directories
     for metric in similarity_metrics:
-        output_dir = f"D:/LLM-Hallucination/data/meanings/{metric}_sim"
+        output_dir = f"D:/LLM HALL/LLM-Hallucination/data/meanings/{metric}_sim"
         os.makedirs(output_dir, exist_ok=True)
 
-    all_paths = [path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, path13]
+    all_paths = [path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, path13 ]
 
     for file_path in all_paths:
         print(f"\n========================================================")
@@ -141,7 +177,7 @@ if __name__ == "__main__":
             # 3. Save File ONCE per metric (Efficient)
             base_file = os.path.basename(file_path)
             output_name = base_file.replace('.pickle', f'_{metric}_clusters.json')
-            output_filename = f"D:/LLM-Hallucination/data/meanings/{metric}_sim/{output_name}"
+            output_filename = f"D:/LLM HALL/LLM-Hallucination/data/meanings/{metric}_sim/{output_name}"
 
             with open(output_filename, 'w') as f:
                 json.dump(final_output, f, indent=2)
