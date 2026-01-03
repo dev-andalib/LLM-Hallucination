@@ -32,6 +32,9 @@ def run_adaptive_experiment():
     for directory_path, metric_name in directories:
         print(f"Processing files in {metric_name} directory...")
 
+        # Initialize results for the current metric
+        metric_results = {}
+
         # Iterate through all JSON files in the current directory
         for filename in os.listdir(directory_path):
             if filename.endswith(".json"):  # Process only .json files
@@ -90,22 +93,23 @@ def run_adaptive_experiment():
                             "samples_used": final_N
                         }
 
-                    # Add the results from this file to the global results
-                    all_results[filename] = results
+                    # Add the results from this file to the metric's results
+                    metric_results[filename] = results
                     print(f"Processed {filename}...")
 
                 except Exception as e:
                     print(f"Error processing {filename}: {e}")
 
-        # Save the results for each similarity metric to a separate file
+        # Save the results for this metric to a separate file
         output_filename = f"{metric_name}_adaptive_results.json"
         output_filepath = os.path.join(OUTPUT_DIRECTORY, output_filename)
         
         # Create output directory if it doesn't exist
         os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
 
+        # Save all the results for the current metric
         with open(output_filepath, "w") as f:
-            json.dump(all_results, f, indent=2)
+            json.dump(metric_results, f, indent=2)
             print(f"Done. Results saved to {output_filepath}.")
 
 if __name__ == "__main__":
